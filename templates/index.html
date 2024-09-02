@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>House Price Predictor</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow">
+            <div class="card-header text-center bg-primary text-white">
+                <h2>House Price Predictor</h2>
+            </div>
+            <div class="card-body">
+                <form action="/predict" method="post">
+                    <!-- Area -->
+                    <div class="form-group">
+                        <label for="area">Area (in sq ft):</label>
+                        <input type="number" class="form-control" id="area" name="area" placeholder="Enter area" min="500" max="10000" required list="areaList">
+                        <datalist id="areaList">
+                            <option value="500">
+                            <option value="1000">
+                            <option value="1500">
+                            <option value="2000">
+                            <option value="2500">
+                            <option value="3000">
+                            <option value="3500">
+                            <option value="4000">
+                            <option value="4500">
+                            <option value="5000">
+                        </datalist>
+                    </div>
+                    <!-- Bedrooms -->
+                    <div class="form-group">
+                        <label for="bedrooms">Bedrooms:</label>
+                        <select class="form-control" id="bedrooms" name="bedrooms" required>
+                            <option value="" disabled selected>Select number of bedrooms</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <!-- Bathrooms -->
+                    <div class="form-group">
+                        <label for="bathrooms">Bathrooms:</label>
+                        <select class="form-control" id="bathrooms" name="bathrooms" required>
+                            <option value="" disabled selected>Select number of bathrooms</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </div>
+                    <!-- Stories -->
+                    <div class="form-group">
+                        <label for="stories">Stories:</label>
+                        <select class="form-control" id="stories" name="stories" required>
+                            <option value="" disabled selected>Select number of stories</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <!-- Mainroad -->
+                    <div class="form-group">
+                        <label for="mainroad">Main Road Access:</label>
+                        <select class="form-control" id="mainroad" name="mainroad" required>
+                            <option value="" disabled selected>Does the house have main road access?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <!-- Guestroom -->
+                    <div class="form-group">
+                        <label for="guestroom">Guest Room:</label>
+                        <select class="form-control" id="guestroom" name="guestroom" required>
+                            <option value="" disabled selected>Is there a guest room?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <!-- Basement -->
+                    <div class="form-group">
+                        <label for="basement">Basement:</label>
+                        <select class="form-control" id="basement" name="basement" required>
+                            <option value="" disabled selected>Is there a basement?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <!-- Hot Water Heating -->
+                    <div class="form-group">
+                        <label for="hotwaterheating">Hot Water Heating:</label>
+                        <select class="form-control" id="hotwaterheating" name="hotwaterheating" required>
+                            <option value="" disabled selected>Does the house have hot water heating?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <!-- Air Conditioning -->
+                    <div class="form-group">
+                        <label for="airconditioning">Air Conditioning:</label>
+                        <select class="form-control" id="airconditioning" name="airconditioning" required>
+                            <option value="" disabled selected>Does the house have air conditioning?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <!-- Parking -->
+                    <div class="form-group">
+                        <label for="parking">Parking Spaces:</label>
+                        <select class="form-control" id="parking" name="parking" required>
+                            <option value="" disabled selected>Select number of parking spaces</option>
+                            <option value="0">0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                    <!-- Preferred Area -->
+                    <div class="form-group">
+                        <label for="prefarea">Preferred Area:</label>
+                        <select class="form-control" id="prefarea" name="prefarea" required>
+                            <option value="" disabled selected>Is the house in a preferred area?</option>
+                            <option value="yes">Yes</option>
+                            <option value="no">No</option>
+                        </select>
+                    </div>
+                    <!-- Furnishing Status -->
+                    <div class="form-group">
+                        <label for="furnishingstatus">Furnishing Status:</label>
+                        <select class="form-control" id="furnishingstatus" name="furnishingstatus" required>
+                            <option value="" disabled selected>Select furnishing status</option>
+                            <option value="furnished">Furnished</option>
+                            <option value="semi-furnished">Semi-Furnished</option>
+                            <option value="unfurnished">Unfurnished</option>
+                        </select>
+                    </div>
+                    <!-- Submit Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-success btn-lg">Predict Price</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+</body>
+</html>
